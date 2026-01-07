@@ -85,9 +85,9 @@ export default function Quiz() {
   if (submitted) {
     return (
       <Container maxWidth="md" sx={{ py: 5 }}>
-        <Typography variant="h4" align="center" gutterBottom>
+        {/* <Typography variant="h4" align="center" gutterBottom>
           Self-Discovery Quiz
-        </Typography>
+        </Typography> */}
         {userValue === 7 ? (
           <RedirectComponent />
         ) : (

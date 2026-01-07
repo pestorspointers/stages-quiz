@@ -1,12 +1,14 @@
 // src/components/Result.jsx
+import VideoPlayer from "./VideoPlayer";
 import { Typography, Paper, List, ListItem } from "@mui/material";
 import quizData from "../data/quizData";
 
 export default function Result({ answers, userValue }) {
+  const golfVid = "https://youtu.be/Y3HHlHSh-Tk?si=u3MKlZhHSWuyefDr";
   if (userValue >= 1 && userValue <= 6) {
     return (
       <div>
-        <p>Display VSL{userValue}</p>
+        <VideoPlayer selectedVideo={golfVid} />
       </div>
     );
   }

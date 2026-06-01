@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  Box,
   FormControl,
   FormGroup,
   FormControlLabel,
@@ -17,10 +18,30 @@ export default function Question({ data, selected, onChange, disabledOptions }) 
     }
   };
 
+  const colonIndex = data.prompt.indexOf(":");
+  const category = colonIndex !== -1 ? data.prompt.slice(0, colonIndex) : null;
+  const rest = colonIndex !== -1 ? data.prompt.slice(colonIndex + 1).trim() : data.prompt;
+
   return (
     <Paper sx={{ p: 3, mb: 3 }}>
       <Typography variant="h6" gutterBottom>
-        {data.prompt}
+        {category && (
+          <Box
+            component="span"
+            sx={{
+              display: "block",
+              fontSize: "0.75rem",
+              fontWeight: 800,
+              letterSpacing: "0.12em",
+              textTransform: "uppercase",
+              color: "primary.main",
+              mb: 0.5,
+            }}
+          >
+            {category}
+          </Box>
+        )}
+        {rest}
       </Typography>
       <FormControl component="fieldset" variant="standard">
         <FormGroup>

@@ -1,7 +1,7 @@
 const quizData = [
   {
     id: 1,
-    prompt: "Where are you right now in your faith or spiritual journey?",
+    prompt: "SPIRITUALITY: Where are you right now in your faith or spiritual journey? (Click all that apply)",
     options: [
       "🔸 I believe in God (or a Higher Power) guiding my life 💫",
       "🔸 I’m searching for truth and deeper meaning 🫥",
@@ -14,7 +14,7 @@ const quizData = [
   },
   {
     id: 2,
-    prompt: "How have you been feeling lately — honestly?",
+    prompt: "EMOTIONALLY: How have you been feeling lately — honestly? (Click all that apply)",
     options: [
       "😔 I feel lost or unsure where my life is going",
       "💭 My life feels empty or disappointing 😑",
@@ -27,7 +27,7 @@ const quizData = [
   },
   {
     id: 3,
-    prompt: "How clear do you feel about your life’s purpose?",
+    prompt: "CLARITY & DIRECTION: How clear do you feel about your life’s purpose? (Click all that apply)",
     options: [
       "🧭 I’m seeking more wisdom, discipline, and clarity 🕵️‍♀️",
       "💪 I struggle with confidence and self-worth",
@@ -40,7 +40,7 @@ const quizData = [
   },
   {
     id: 4,
-    prompt: "How do you feel about your motivation and consistency?",
+    prompt: "ENDURANCE: How do you feel about your motivation and consistency? (Click all that apply)",
     options: [
       "⚙️ I make progress but struggle to stay consistent 🗺️",
       "🧱 I often lose strength or direction",
@@ -53,7 +53,7 @@ const quizData = [
   },
   {
     id: 5,
-    prompt: "What best describes your relationships and sense of connection?",
+    prompt: "RELATIONALLY: What best describes your relationships and sense of connection? (Click all that apply)",
     options: [
       "💔 I struggle to maintain healthy relationships",
       "🌫️ I often feel disconnected or alone",
@@ -66,7 +66,7 @@ const quizData = [
   },
   {
     id: 6,
-    prompt: "What best describes your sense of fulfillment or meaning in life?",
+    prompt: "RELEVANCE: What best describes your sense of fulfillment or meaning in life? (Click all that apply)",
     options: [
       "🚀 I want to become the best version of myself 💎",
       "🎯 I’m chasing my destiny and deeper fulfillment",

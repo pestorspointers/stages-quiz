@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { getUrl } from "aws-amplify/storage";
 import VideoPlayer from "./VideoPlayer";
+import RedirectComponent from "./RedirectComponent";
 import { Typography, Box, CircularProgress, Button } from "@mui/material";
 import vslData from "../data/vslData";
 
@@ -8,6 +9,7 @@ export default function Result({ userValue }) {
   const [videoUrl, setVideoUrl] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [videoEnded, setVideoEnded] = useState(false);
 
   const vsl = vslData[userValue];
 
@@ -30,6 +32,8 @@ export default function Result({ userValue }) {
   }, [vsl]);
 
   if (!vsl) return null;
+
+  if (videoEnded) return <RedirectComponent />;
 
   return (
     <Box sx={{ maxWidth: 720, mx: "auto", px: 2, py: 4 }}>
@@ -84,7 +88,7 @@ export default function Result({ userValue }) {
 
       {!loading && !error && videoUrl && (
         <>
-          <VideoPlayer selectedVideo={videoUrl} />
+          <VideoPlayer selectedVideo={videoUrl} onEnded={() => setVideoEnded(true)} />
           <Box display="flex" justifyContent="center" mt={2}>
             <Button
               variant="text"

@@ -6,7 +6,8 @@ function RedirectComponent() {
 
   useEffect(() => {
     if (countdown === 0) {
-      window.location.href = "https://www.PestorsPointers.com";
+      window.location.href =
+        "https://www.pestorspointers.com/course-offerings-page";
       return;
     }
 

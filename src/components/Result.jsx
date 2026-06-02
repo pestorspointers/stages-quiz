@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { getUrl } from "aws-amplify/storage";
 import VideoPlayer from "./VideoPlayer";
-import { Typography, Box, CircularProgress } from "@mui/material";
+import { Typography, Box, CircularProgress, Button } from "@mui/material";
 import vslData from "../data/vslData";
 
 export default function Result({ userValue }) {
@@ -83,7 +83,19 @@ export default function Result({ userValue }) {
       )}
 
       {!loading && !error && videoUrl && (
-        <VideoPlayer selectedVideo={videoUrl} />
+        <>
+          <VideoPlayer selectedVideo={videoUrl} />
+          <Box display="flex" justifyContent="center" mt={2}>
+            <Button
+              variant="text"
+              size="small"
+              href="https://www.pestorspointers.com/"
+              sx={{ color: "text.secondary" }}
+            >
+              Skip Video
+            </Button>
+          </Box>
+        </>
       )}
     </Box>
   );

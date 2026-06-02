@@ -20,33 +20,42 @@ export default function Quiz() {
   const total = quizData.length;
 
   useEffect(() => {
-    const allAnswers = [
-      answers[0],
-      answers[1],
-      answers[2],
-      answers[3],
-      answers[4],
-    ];
+    // Q1 (answers[0]) intentionally excluded from scoring
+    const scoringAnswers = [answers[1], answers[2], answers[3], answers[4], answers[5]];
 
-    for (let i = 0; i < allAnswers.length; i++) {
-      const questionAnswers = allAnswers[i] || [];
-      if (questionAnswers.length === 0) {
-        setUserValue(null);
-        return;
-      }
+    const anyAnswered = scoringAnswers.some((a) => a && a.length > 0);
+    if (!anyAnswered) {
+      setUserValue(null);
+      return;
+    }
 
-      const lastOption = quizData[i].options[6];
-      const hasOptionFromFirstSix = questionAnswers.some(
-        (answer) => answer !== lastOption
-      );
-
-      if (hasOptionFromFirstSix) {
-        setUserValue(i + 2);
-        return;
+    // Tally how many times each option position (1-7) was selected across all scoring questions
+    const counts = {};
+    for (let i = 0; i < scoringAnswers.length; i++) {
+      const questionAnswers = scoringAnswers[i] || [];
+      const options = quizData[i + 1].options;
+      for (const answer of questionAnswers) {
+        const idx = options.indexOf(answer);
+        if (idx !== -1) {
+          const val = idx + 1;
+          counts[val] = (counts[val] || 0) + 1;
+        }
       }
     }
 
-    setUserValue(7);
+    // Pick the most-selected value; ties go to the lower value
+    let winner = null;
+    let best = 0;
+    for (const [val, count] of Object.entries(counts)) {
+      const n = Number(val);
+      if (count > best || (count === best && n < winner)) {
+        winner = n;
+        best = count;
+      }
+    }
+
+    // Values below 2 have no vslData entry — treat as stage 2
+    setUserValue(Math.max(2, winner ?? 7));
   }, [answers]);
 
   const handleAnswerChange = (newSelected) => {

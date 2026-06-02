@@ -35,7 +35,7 @@ function RedirectComponent() {
           <Typography variant="body1" sx={{ mb: 3 }}>
             If interested in learning more, please checkout{" "}
             <Link
-              href="https://www.PestorsPointers.com"
+              href="https://www.pestorspointers.com/course-offerings-page"
               target="_blank"
               rel="noopener noreferrer"
               underline="hover"

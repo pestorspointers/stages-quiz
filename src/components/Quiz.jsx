@@ -20,30 +20,47 @@ export default function Quiz() {
   const total = quizData.length;
 
   useEffect(() => {
-    // Q1 (answers[0]) intentionally excluded from scoring
-    const scoringAnswers = [answers[1], answers[2], answers[3], answers[4], answers[5]];
+    // Slide 1 (Q1, answers[0]) — does nothing, excluded entirely
 
-    const anyAnswered = scoringAnswers.some((a) => a && a.length > 0);
-    if (!anyAnswered) {
+    // Slide 2 (Q2, answers[1]) — either/or gate
+    // Any answer 1-6 locks userValue to stage 1 (VSL 2); only answer 7 passes through
+    const slide2Answers = answers[1] || [];
+    const slide2None = quizData[1].options[6];
+    const slide2HasNonSeven = slide2Answers.some((a) => a !== slide2None);
+    if (slide2HasNonSeven) {
+      setUserValue(2); // Stage 1 → VSL 2
+      return;
+    }
+
+    // Slides 3–6 (Q3-Q6, answers[2]-answers[5])
+    // Tally option positions 1-6 only (7 = "None", ignored unless all are 7)
+    const tailAnswers = [answers[2], answers[3], answers[4], answers[5]];
+
+    if (!tailAnswers.some((a) => a && a.length > 0)) {
       setUserValue(null);
       return;
     }
 
-    // Tally how many times each option position (1-7) was selected across all scoring questions
     const counts = {};
-    for (let i = 0; i < scoringAnswers.length; i++) {
-      const questionAnswers = scoringAnswers[i] || [];
-      const options = quizData[i + 1].options;
+    for (let i = 0; i < tailAnswers.length; i++) {
+      const questionAnswers = tailAnswers[i] || [];
+      const options = quizData[i + 2].options;
       for (const answer of questionAnswers) {
         const idx = options.indexOf(answer);
-        if (idx !== -1) {
+        if (idx !== -1 && idx < 6) { // skip position 7 (None)
           const val = idx + 1;
           counts[val] = (counts[val] || 0) + 1;
         }
       }
     }
 
-    // Pick the most-selected value; ties go to the lower value
+    // All "None" answers → redirect
+    if (Object.keys(counts).length === 0) {
+      setUserValue(7);
+      return;
+    }
+
+    // Most-selected value wins; ties go to the lower number
     let winner = null;
     let best = 0;
     for (const [val, count] of Object.entries(counts)) {
@@ -54,8 +71,9 @@ export default function Quiz() {
       }
     }
 
-    // Values below 2 have no vslData entry — treat as stage 2
-    setUserValue(Math.max(2, winner ?? 7));
+    // Stage → VSL key mapping:
+    // Stage 1→VSL2, Stage 2→VSL3, Stage 3→VSL4, Stage 4→VSL5, Stage 5+6→VSL6
+    setUserValue(Math.min(winner + 1, 6));
   }, [answers]);
 
   const handleAnswerChange = (newSelected) => {

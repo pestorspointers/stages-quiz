@@ -1,7 +1,8 @@
 const quizData = [
   {
     id: 1,
-    prompt: "SPIRITUALITY: Where are you right now in your faith or spiritual journey? (Click all that apply)",
+    prompt:
+      "SPIRITUALITY: Where are you right now in your faith or spiritual journey? (Click all that apply)",
     options: [
       "🔸 I believe in God (or a Higher Power) guiding my life 💫",
       "🔸 I’m searching for truth and deeper meaning 🫥",
@@ -14,7 +15,8 @@ const quizData = [
   },
   {
     id: 2,
-    prompt: "EMOTIONALLY: How have you been feeling lately — honestly? (Click all that apply)",
+    prompt:
+      "EMOTIONALLY: How have you been feeling lately — honestly? (Click all that apply)",
     options: [
       "😔 I feel lost or unsure where my life is going",
       "💭 My life feels empty or disappointing 😑",
@@ -27,7 +29,8 @@ const quizData = [
   },
   {
     id: 3,
-    prompt: "CLARITY & DIRECTION: How clear do you feel about your life’s purpose? (Click all that apply)",
+    prompt:
+      "CLARITY & DIRECTION: How clear do you feel about your life’s purpose? (Click all that apply)",
     options: [
       "🧭 I’m seeking more wisdom, discipline, and clarity 🕵️‍♀️",
       "💪 I struggle with confidence and self-worth",
@@ -40,7 +43,8 @@ const quizData = [
   },
   {
     id: 4,
-    prompt: "ENDURANCE: How do you feel about your motivation and consistency? (Click all that apply)",
+    prompt:
+      "ENDURANCE: How do you feel about your motivation and consistency? (Click all that apply)",
     options: [
       "⚙️ I make progress but struggle to stay consistent 🗺️",
       "🧱 I often lose strength or direction",
@@ -53,7 +57,8 @@ const quizData = [
   },
   {
     id: 5,
-    prompt: "RELATIONALLY: What best describes your relationships and sense of connection? (Click all that apply)",
+    prompt:
+      "RELATIONALLY: What best describes your relationships and sense of connection? (Click all that apply)",
     options: [
       "💔 I struggle to maintain healthy relationships",
       "🌫️ I often feel disconnected or alone",
@@ -66,13 +71,14 @@ const quizData = [
   },
   {
     id: 6,
-    prompt: "RELEVANCE: What best describes your sense of fulfillment or meaning in life? (Click all that apply)",
+    prompt:
+      "RELEVANCE: What best describes your sense of fulfillment or meaning in life? (Click all that apply)",
     options: [
       "🚀 I want to become the best version of myself 💎",
       "🎯 I’m chasing my destiny and deeper fulfillment",
       "🌌 I want to understand the true meaning of life",
       "❤️ I want to live a life that truly matters",
-      "🤔 Sometimes I think, `There’s got to be more than this…`",
+      "🤔 Sometimes I think, there’s got to be more than this",
       "😌 I feel content and grateful most of the time 🙏🏻",
       "💯% None apply — I’m completely at peace and satisfied 😎👌🏼",
     ],

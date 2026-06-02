@@ -48,11 +48,13 @@ export default function Question({ data, selected, onChange, disabledOptions }) 
           {data.options.map((option) => (
             <FormControlLabel
               key={option}
+              sx={{ alignItems: "flex-start" }}
               control={
                 <Checkbox
                   checked={selected.includes(option)}
                   onChange={() => handleChange(option)}
                   disabled={disabledOptions.includes(option)}
+                  sx={{ pt: "2px" }}
                 />
               }
               label={option}

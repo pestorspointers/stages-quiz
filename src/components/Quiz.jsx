@@ -21,11 +21,11 @@ export default function Quiz() {
 
   useEffect(() => {
     const allAnswers = [
+      answers[0],
       answers[1],
       answers[2],
       answers[3],
       answers[4],
-      answers[5],
     ];
 
     for (let i = 0; i < allAnswers.length; i++) {
@@ -35,7 +35,7 @@ export default function Quiz() {
         return;
       }
 
-      const lastOption = quizData[i + 1].options[6];
+      const lastOption = quizData[i].options[6];
       const hasOptionFromFirstSix = questionAnswers.some(
         (answer) => answer !== lastOption
       );

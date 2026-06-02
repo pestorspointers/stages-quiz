@@ -1,7 +1,7 @@
 const vslData = {
   2: {
     videoPath: "public-videos/VSL 2 - DEFEATED (DOWN&OUT).mp4",
-    stageLabel: 'Stage #1 — “Drowning in the Ocean”',
+    stageLabel: "Stage #1 — “Drowning in the Ocean.”",
     bullets: [
       "Stuck in life",
       "Anxious, overwhelmed, or emotionally exhausted",
@@ -12,7 +12,7 @@ const vslData = {
   },
   3: {
     videoPath: "public-videos/VSL 3 - BUILDING AWARNESS (NEW-IN-ROADS).mp4",
-    stageLabel: 'Stage #2 — “Head Barely Above the Water”',
+    stageLabel: "Stage #2 — “Head Barely Above the Water.”",
     bullets: [
       "Searching for greater clarity and direction in life",
       "Unsure of your identity or where you truly belong",
@@ -23,7 +23,7 @@ const vslData = {
   },
   4: {
     videoPath: "public-videos/VSL 4 - SELF-GROWTH.mp4",
-    stageLabel: 'Stage #3 — “On Your Own Island”',
+    stageLabel: "Stage #3 — “On Your Own Island.'",
     bullets: [
       "Hopeful about your future, but still searching for greater direction",
       "More confident in yourself, but struggling with consistency",
@@ -34,7 +34,7 @@ const vslData = {
   },
   5: {
     videoPath: "public-videos/VSL 5 - RELATIONSHIP STRUGGLES.mp4",
-    stageLabel: 'Stage #4 — “Leaving the Island in Your Boat”',
+    stageLabel: "Stage #4 — “Leaving the Island in Your Boat.”",
     bullets: [
       "A desire to develop healthier boundaries with people",
       "The need to find your confident voice and stand up for yourself",
@@ -46,7 +46,7 @@ const vslData = {
   6: {
     videoPath: "public-videos/VSL 6 - FINDING & FULFILLING PURPOSE.mp4",
     stageLabel:
-      'Stages #5 and #6 — “Reaching the Shoreline” and “Climbing the Mountain”',
+      "Stages #5 and #6 — “Reaching the Shoreline” and “Climbing the Mountain.”",
     bullets: [
       "Like your life is okay, but you still desire something greater or more meaningful",
       "Called toward deeper purpose, fulfillment, and direction in life",

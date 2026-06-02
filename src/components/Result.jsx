@@ -44,7 +44,7 @@ export default function Result({ userValue }) {
 
       <Typography variant="body1" gutterBottom>
         However, based on your answers, it appears you are currently most
-        influenced by {vsl.stageLabel}.
+        influenced by {vsl.stageLabel}
       </Typography>
 
       <Typography variant="body1" gutterBottom sx={{ mt: 1 }}>

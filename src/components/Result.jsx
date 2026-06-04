@@ -88,12 +88,15 @@ export default function Result({ userValue }) {
 
       {!loading && !error && videoUrl && (
         <>
-          <VideoPlayer selectedVideo={videoUrl} onEnded={() => setVideoEnded(true)} />
+          <VideoPlayer
+            selectedVideo={videoUrl}
+            onEnded={() => setVideoEnded(true)}
+          />
           <Box display="flex" justifyContent="center" mt={2}>
             <Button
               variant="text"
               size="small"
-              href="https://www.pestorspointers.com/"
+              href="https://www.pestorspointers.com/course-offerings-page"
               sx={{ color: "text.secondary" }}
             >
               Skip Video

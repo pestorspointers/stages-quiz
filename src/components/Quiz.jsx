@@ -92,7 +92,7 @@ export default function Quiz() {
     setSubmitted(true);
   };
 
-  const allAnswered = Object.keys(answers).length === total;
+  const allAnswered = quizData.every((_, i) => answers[i]?.length > 0);
 
   const getDisabledOptions = () => {
     const currentAnswers = answers[current] || [];
@@ -167,7 +167,7 @@ export default function Quiz() {
           <Button
             variant="contained"
             onClick={handleNext}
-            disabled={!answers[current]}
+            disabled={!(answers[current]?.length > 0)}
           >
             Next
           </Button>

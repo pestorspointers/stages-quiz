@@ -1,9 +1,10 @@
 // src/components/Quiz.jsx
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import quizData from "../data/quizData";
 import Question from "./Question";
 import Result from "./Result";
 import RedirectComponent from "./RedirectComponent";
+import { track } from "../lib/analytics";
 import {
   Button,
   Container,
@@ -18,6 +19,25 @@ export default function Quiz() {
   const [submitted, setSubmitted] = useState(false);
   const [userValue, setUserValue] = useState(null);
   const total = quizData.length;
+
+  // Funnel-event latches so re-renders / StrictMode double-invokes don't double-fire.
+  const quizStartedRef = useRef(false);
+  const quizCompletedRef = useRef(false);
+  const questionsFiredRef = useRef(new Set());
+
+  // Quiz start — fire exactly once when the quiz first mounts.
+  useEffect(() => {
+    if (quizStartedRef.current) return;
+    quizStartedRef.current = true;
+    track("quiz_start");
+  }, []);
+
+  // Fire quiz_question once per 1-based question index.
+  const fireQuestion = (questionNumber) => {
+    if (questionsFiredRef.current.has(questionNumber)) return;
+    questionsFiredRef.current.add(questionNumber);
+    track("quiz_question", { question_number: questionNumber });
+  };
 
   useEffect(() => {
     // Slide 1 (Q1, answers[0]) — does nothing, excluded entirely
@@ -81,6 +101,8 @@ export default function Quiz() {
   };
 
   const handleNext = () => {
+    // Record the question being completed (1-based) before advancing.
+    fireQuestion(current + 1);
     if (current < total - 1) setCurrent(current + 1);
   };
 
@@ -89,6 +111,12 @@ export default function Quiz() {
   };
 
   const handleSubmit = () => {
+    // Q6 answered, then the quiz is complete — fire each once.
+    fireQuestion(total);
+    if (!quizCompletedRef.current) {
+      quizCompletedRef.current = true;
+      track("quiz_complete");
+    }
     setSubmitted(true);
   };
 

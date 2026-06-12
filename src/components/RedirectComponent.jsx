@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Card, CardContent, Link, Typography, Container } from "@mui/material";
+import { redirectToOffer } from "../lib/analytics";
+
+const OFFER_URL = "https://www.pestorspointers.com/course-offerings-page";
 
 function RedirectComponent() {
   const [countdown, setCountdown] = useState(10);
 
   useEffect(() => {
     if (countdown === 0) {
-      window.location.href =
-        "https://www.pestorspointers.com/course-offerings-page";
+      // Fire the click-through conversion, then navigate (beacon flush).
+      redirectToOffer(OFFER_URL);
       return;
     }
 

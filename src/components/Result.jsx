@@ -1,17 +1,28 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { getUrl } from "aws-amplify/storage";
 import VideoPlayer from "./VideoPlayer";
 import RedirectComponent from "./RedirectComponent";
 import { Typography, Box, CircularProgress, Button } from "@mui/material";
 import vslData from "../data/vslData";
+import { track, redirectToOffer } from "../lib/analytics";
+
+const OFFER_URL = "https://www.pestorspointers.com/course-offerings-page";
 
 export default function Result({ userValue }) {
   const [videoUrl, setVideoUrl] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [videoEnded, setVideoEnded] = useState(false);
+  const resultViewedRef = useRef(false);
 
   const vsl = vslData[userValue];
+
+  // Result view — fire exactly once, tagged with the result identifier.
+  useEffect(() => {
+    if (!vsl || resultViewedRef.current) return;
+    resultViewedRef.current = true;
+    track("result_view", { result: userValue });
+  }, [vsl, userValue]);
 
   useEffect(() => {
     if (!vsl) return;
@@ -91,12 +102,13 @@ export default function Result({ userValue }) {
           <VideoPlayer
             selectedVideo={videoUrl}
             onEnded={() => setVideoEnded(true)}
+            result={userValue}
           />
           <Box display="flex" justifyContent="center" mt={2}>
             <Button
               variant="text"
               size="small"
-              href="https://www.pestorspointers.com/course-offerings-page"
+              onClick={() => redirectToOffer(OFFER_URL)}
               sx={{ color: "text.secondary" }}
             >
               Skip Video

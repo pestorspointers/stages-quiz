@@ -1,0 +1,18 @@
+version: 1
+# Updated 2026-06-12: write REACT_APP_META_PIXEL_ID into .env at build time
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - npm ci
+        - echo "REACT_APP_META_PIXEL_ID=$REACT_APP_META_PIXEL_ID" >> .env
+    build:
+      commands:
+        - npm run build
+  artifacts:
+    baseDirectory: build
+    files:
+      - "**/*"
+  cache:
+    paths:
+      - node_modules/**/*

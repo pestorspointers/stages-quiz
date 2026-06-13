@@ -11,6 +11,9 @@
 const FB_PIXEL_ID =
   process.env.REACT_APP_META_PIXEL_ID || process.env.REACT_APP_FB_PIXEL_ID;
 
+// Exported so other modules can read/log the active Pixel ID if needed.
+export const metaPixelId = FB_PIXEL_ID;
+
 let initialized = false;
 
 // Maps our internal event names -> Meta standard/custom events.
@@ -70,10 +73,26 @@ export function initAnalytics() {
  * @param {object} params     e.g. { question_number: 3 } or { result: 'A' }
  */
 export function track(eventName, params = {}) {
-  if (!window.fbq) return;
   const meta = META_EVENT_MAP[eventName];
-  if (meta) window.fbq(meta.type, meta.name, params);
-  else window.fbq("trackCustom", eventName, params);
+  const metaName = meta ? meta.name : eventName;
+  const metaType = meta ? meta.type : "trackCustom";
+
+  // Always attach the Pixel ID to the payload so every event carries it.
+  const payload = { ...params, pixel_id: metaPixelId };
+
+  // Log every event (fires even if fbq failed to load — e.g. ad blocker — so
+  // the funnel is always observable in the console while debugging).
+  console.log("Data sent: ", "| event:", eventName);
+
+  if (!window.fbq) {
+    console.warn(
+      "[analytics] window.fbq not available — event not sent to Meta:",
+      eventName,
+    );
+    return;
+  }
+
+  window.fbq(metaType, metaName, payload);
 }
 
 /**
@@ -87,8 +106,25 @@ export function track(eventName, params = {}) {
 export function redirectToOffer(url) {
   if (!url) return;
 
+  const payload = { pixel_id: metaPixelId, redirect_url: url };
+
+  console.log(
+    "Meta Pixel ID: ",
+    metaPixelId,
+    "| event:",
+    "click_to_kajabi (redirect)",
+    "| meta event:",
+    "track -> InitiateCheckout",
+    "| params:",
+    payload,
+  );
+
   // Meta standard conversion
-  if (window.fbq) window.fbq("track", "InitiateCheckout");
+  if (window.fbq) window.fbq("track", "InitiateCheckout", payload);
+  else
+    console.warn(
+      "[analytics] window.fbq not available — redirect conversion not sent to Meta",
+    );
 
   // Let the beacon flush, then navigate. (fbq has no completion callback, so a
   // short delay is the standard way to avoid losing the event to navigation.)

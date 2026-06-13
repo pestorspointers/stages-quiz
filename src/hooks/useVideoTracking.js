@@ -27,7 +27,7 @@ export function useVideoTracking(extraParams = {}) {
         }
       });
     };
-    const onEnded = () => track("video_complete", extraParams);
+    const onEnded = () => track("video_complete", { percent: 100, ...extraParams });
 
     video.addEventListener("play", onPlay);
     video.addEventListener("timeupdate", onTimeUpdate);

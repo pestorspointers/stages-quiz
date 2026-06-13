@@ -34,7 +34,7 @@ const vslData = {
   },
   5: {
     videoPath: "public-videos/VSL 5 - RELATIONSHIP STRUGGLES.mp4",
-    stageLabel: "Stage #4 — “Leaving the Island in Your Boat.”",
+    stageLabel: "Stage #4 — “Leaving the Island in Your Lifeboat.”",
     bullets: [
       "A desire to develop healthier boundaries with people",
       "The need to find your confident voice and stand up for yourself",

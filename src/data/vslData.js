@@ -23,7 +23,7 @@ const vslData = {
   },
   4: {
     videoPath: "public-videos/VSL 4 - SELF-GROWTH.mp4",
-    stageLabel: "Stage #3 — “On Your Own Island.",
+    stageLabel: "Stage #3 — “Reaching the Island.",
     bullets: [
       "Hopeful about your future, but still searching for greater direction",
       "More confident in yourself, but struggling with consistency",
